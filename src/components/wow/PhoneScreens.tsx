@@ -191,53 +191,62 @@ function MissedCallScreen() {
   >;
   return (
     <ScreenWrap>
-      <div className="text-white/55 font-mono text-[10px] tracking-[0.2em] uppercase mb-4">
-        Incoming
+      <div className="flex items-center gap-2 text-[var(--color-ember)] font-mono text-[10px] tracking-[0.2em] uppercase mb-4">
+        <span className="relative inline-flex w-1.5 h-1.5">
+          <span className="absolute inset-0 rounded-full bg-[var(--color-ember)]" />
+          <motion.span
+            className="absolute inset-0 rounded-full bg-[var(--color-ember)]"
+            animate={{ scale: [1, 2.4, 1], opacity: [0.6, 0, 0.6] }}
+            transition={{ duration: 1.6, ease: "easeOut", repeat: Infinity }}
+          />
+        </span>
+        {data.tag}
       </div>
+
       <motion.div
         layout
         initial={{ scale: 0.96 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5, ease: EASE_CINEMA }}
-        className="rounded-[20px] bg-white/[0.07] backdrop-blur-sm border border-white/10 p-5"
+        className="rounded-[18px] bg-white/[0.07] backdrop-blur-sm border border-white/10 p-4"
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-[var(--color-ember)]/90 flex items-center justify-center">
-            <span className="font-display italic text-white text-[18px]">S</span>
+          <div className="shrink-0 w-9 h-9 rounded-full bg-[var(--color-ember)]/90 flex items-center justify-center">
+            <span className="font-display italic text-white text-[16px] leading-none">
+              S
+            </span>
           </div>
-          <div className="flex-1">
-            <div className="text-white text-[15px] tracking-[-0.01em] leading-tight">
+          <div className="min-w-0 flex-1">
+            <div className="text-white text-[14px] tracking-[-0.01em] leading-tight truncate">
               {data.name}
             </div>
-            <div className="text-white/45 text-[11px] mt-0.5 font-mono tracking-[0.04em]">
+            <div className="text-white/45 text-[10px] mt-0.5 font-mono tracking-[0.04em] truncate">
               {data.subtitle}
             </div>
           </div>
-          <span className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-ember)] font-mono">
-            {data.tag}
-          </span>
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5, ease: EASE_CINEMA }}
-          className="mt-4 pt-4 border-t border-white/10 text-white/70 text-[12px] leading-snug"
+          className="mt-3 pt-3 border-t border-white/10 text-white/70 text-[11px] leading-snug"
         >
           “Their water heater is leaking. They need someone tonight.”
         </motion.div>
       </motion.div>
 
-      <div className="mt-auto flex items-center justify-between">
-        <ActionPill label="Decline" tone="muted" />
-        <motion.div
-          initial={{ scale: 0.85, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.55, duration: 0.6, ease: EASE_CINEMA }}
-        >
-          <ActionPill label="Callline picks up" tone="ember" />
-        </motion.div>
-      </div>
+      <motion.div
+        initial={{ scale: 0.92, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.55, duration: 0.6, ease: EASE_CINEMA }}
+        className="mt-auto"
+      >
+        <div className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[var(--color-ember)] text-white text-[11px] font-mono tracking-[0.14em] uppercase">
+          Callline picks up
+          <span aria-hidden="true">→</span>
+        </div>
+      </motion.div>
     </ScreenWrap>
   );
 }
@@ -393,22 +402,3 @@ function StackScreen() {
   );
 }
 
-function ActionPill({
-  label,
-  tone,
-}: {
-  label: string;
-  tone: "muted" | "ember";
-}) {
-  const palette =
-    tone === "ember"
-      ? "bg-[var(--color-ember)] text-white"
-      : "bg-white/10 text-white/70 border border-white/10";
-  return (
-    <div
-      className={`px-4 py-2 rounded-full text-[11px] font-mono tracking-[0.12em] uppercase ${palette}`}
-    >
-      {label}
-    </div>
-  );
-}
