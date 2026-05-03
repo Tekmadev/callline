@@ -59,7 +59,7 @@ function HeroPhone({ ariaLabel }: { ariaLabel?: string }) {
         style={{ transformStyle: "preserve-3d" }}
         className="relative"
       >
-        <PhoneSlab />
+        <PhoneSlab variant="hero" />
       </motion.div>
     </div>
   );
@@ -115,7 +115,7 @@ function ScrollyPhone({
         }}
         className="relative"
       >
-        <PhoneSlab scrollProgress={scrollProgress} />
+        <PhoneSlab scrollProgress={scrollProgress} variant="scrolly" />
       </motion.div>
     </div>
   );
@@ -123,8 +123,10 @@ function ScrollyPhone({
 
 function PhoneSlab({
   scrollProgress,
+  variant = "hero",
 }: {
   scrollProgress?: MotionValue<number>;
+  variant?: "hero" | "scrolly";
 }) {
   return (
     <div
@@ -213,7 +215,7 @@ function PhoneSlab({
         }}
       >
         {/* The screen itself: existing PhoneScreens component */}
-        <PhoneScreens scrollProgress={scrollProgress} />
+        <PhoneScreens scrollProgress={scrollProgress} variant={variant} />
 
         {/* Subtle screen reflection sheen */}
         <div

@@ -19,9 +19,15 @@ const phaseFromProgress = (v: number): Phase => {
 export function PhoneScreens({
   scrollProgress,
   phase,
+  variant = "hero",
 }: {
   scrollProgress?: MotionValue<number>;
   phase?: Phase;
+  /**
+   * "hero" → idle phase shows the bright Callline lock screen (AI is ready).
+   * "scrolly" → idle phase shows a quiet sleeping phone (moment before the call).
+   */
+  variant?: "hero" | "scrolly";
 }) {
   // Lazy initial state: read scrollProgress once, no setState in effect.
   const [scrollPhase, setScrollPhase] = useState<Phase>(() => {
@@ -39,22 +45,28 @@ export function PhoneScreens({
   }, [phase, scrollProgress]);
 
   const activePhase: Phase = phase !== undefined ? phase : scrollPhase;
+  const isSleeping = activePhase === 0 && variant === "scrolly";
 
   return (
     <div className="relative w-full h-full font-sans">
-      {/* Status bar */}
-      <div className="absolute top-0 left-0 right-0 z-20 px-7 pt-5 flex items-center justify-between text-white/55 font-mono text-[12px]">
-        <span>9:41</span>
-        <div className="flex items-center gap-1.5">
-          <span>•••</span>
-          <span className="inline-block w-6 h-3 border border-white/40 rounded-[3px] relative">
-            <span className="absolute inset-0.5 right-1 bg-white/55 rounded-[1px]" />
-          </span>
+      {/* Status bar — hidden when sleeping so the screen reads as "off" */}
+      {!isSleeping && (
+        <div className="absolute top-0 left-0 right-0 z-20 px-7 pt-5 flex items-center justify-between text-white/55 font-mono text-[12px]">
+          <span>9:41</span>
+          <div className="flex items-center gap-1.5">
+            <span>•••</span>
+            <span className="inline-block w-6 h-3 border border-white/40 rounded-[3px] relative">
+              <span className="absolute inset-0.5 right-1 bg-white/55 rounded-[1px]" />
+            </span>
+          </div>
         </div>
-      </div>
+      )}
 
       <AnimatePresence mode="wait">
-        {activePhase === 0 && <IdleScreen key="idle" />}
+        {activePhase === 0 && variant === "hero" && <IdleScreen key="idle" />}
+        {activePhase === 0 && variant === "scrolly" && (
+          <SleepingScreen key="sleeping" />
+        )}
         {activePhase === 1 && <MissedCallScreen key="call" />}
         {activePhase === 2 && <TranscriptScreen key="transcript" />}
         {activePhase === 3 && <CalendarScreen key="calendar" />}
@@ -77,6 +89,37 @@ function ScreenWrap({ children }: { children: React.ReactNode }) {
       className="absolute inset-0 px-6 pt-16 pb-10 flex flex-col"
     >
       {children}
+    </motion.div>
+  );
+}
+
+function SleepingScreen() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7, ease: EASE_CINEMA }}
+      className="absolute inset-0 flex flex-col items-center justify-center"
+    >
+      {/* The phone is "asleep" — screen reads as off, faint time peeking through */}
+      <motion.div
+        animate={{ opacity: [0.18, 0.32, 0.18] }}
+        transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
+        className="font-display italic text-white/30 leading-none tracking-[-0.02em]"
+        style={{ fontSize: 48 }}
+      >
+        2:47
+      </motion.div>
+      <div className="mt-3 font-mono text-[9px] tracking-[0.24em] uppercase text-white/20">
+        Tuesday
+      </div>
+      {/* Tiny ember heartbeat — the AI is alive, just standing by */}
+      <motion.span
+        className="mt-16 block w-1 h-1 rounded-full bg-[var(--color-ember)]"
+        animate={{ opacity: [0.25, 0.7, 0.25], scale: [1, 1.4, 1] }}
+        transition={{ duration: 2.6, ease: "easeInOut", repeat: Infinity }}
+      />
     </motion.div>
   );
 }
