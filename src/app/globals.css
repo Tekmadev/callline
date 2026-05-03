@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bone: #f4efe6;
+  --color-ink: #0e0e0c;
+  --color-ink-70: rgba(14, 14, 12, 0.7);
+  --color-ink-50: rgba(14, 14, 12, 0.5);
+  --color-ink-30: rgba(14, 14, 12, 0.3);
+  --color-ink-15: rgba(14, 14, 12, 0.15);
+  --color-ink-10: rgba(14, 14, 12, 0.1);
+  --color-ember: #ff5b1f;
+  --color-forest: #1a2e22;
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter-tight);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  --ease-cinema: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --tracking-tightest: -0.04em;
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.08em;
+
+  --radius-card: 18px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --background: var(--color-bone);
+  --foreground: var(--color-ink);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html,
+body {
+  background: var(--color-bone);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "ss02", "cv11";
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+}
+
+::selection {
+  background: var(--color-ember);
+  color: var(--color-bone);
+}
+
+/* Lenis smooth-scroll classes */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Utilities */
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01", "ss02", "ss03";
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.ease-cinema {
+  transition-timing-function: var(--ease-cinema);
+}
+
+/* Hairline rule */
+.hairline {
+  border-top: 1px solid var(--color-ink-15);
+}
+
+/* Reveal mask used for line-by-line text reveals.
+   Padding-bottom gives descenders (y, j, g, p) room to render under tight
+   line-heights; the negative margin keeps the visual rhythm tight. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
