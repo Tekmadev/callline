@@ -30,7 +30,7 @@ export function WowSection() {
           </div>
 
           {/* Phone scene */}
-          <div className="relative col-span-1 lg:col-span-7 xl:col-span-7 h-[60svh] lg:h-[80vh] order-1 lg:order-2">
+          <div className="relative col-span-1 lg:col-span-7 xl:col-span-7 h-[68svh] sm:h-[72svh] lg:h-[80vh] order-1 lg:order-2">
             <PhoneMock
               mode="scrolly"
               scrollProgress={scrollYProgress}

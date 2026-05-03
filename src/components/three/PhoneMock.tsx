@@ -128,10 +128,10 @@ function PhoneSlab({
 }) {
   return (
     <div
-      className="relative"
+      className="relative w-[200px] sm:w-[240px] md:w-[260px] lg:w-[280px] xl:w-[300px]"
       style={{
-        width: "min(300px, 60vw)",
         aspectRatio: "9 / 19",
+        maxHeight: "82vh",
       }}
     >
       {/* Outer body — brushed dark metal gradient */}

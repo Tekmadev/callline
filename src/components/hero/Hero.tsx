@@ -74,7 +74,7 @@ export function Hero() {
           initial={{ opacity: 0, x: 80 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.9, duration: 1.6, ease: EASE_CINEMA }}
-          className="relative col-span-1 lg:col-span-5 h-[420px] md:h-[560px] lg:h-[680px] -mr-6 md:-mr-10 lg:mr-[-4vw]"
+          className="relative col-span-1 lg:col-span-5 h-[460px] sm:h-[540px] md:h-[600px] lg:h-[680px] -mr-6 md:-mr-10 lg:mr-[-4vw]"
         >
           <PhoneMock
             mode="hero"
