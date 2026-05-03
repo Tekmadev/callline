@@ -16,10 +16,10 @@ export function TopBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const onBookClick = (e: React.MouseEvent) => {
+  const scrollTo = (selector: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     document
-      .querySelector("#live-cta")
+      .querySelector(selector)
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -51,14 +51,31 @@ export function TopBar() {
             <span className="-mt-0.5">{copy.brand.name}</span>
           </Link>
 
-          <a
-            href="#live-cta"
-            onClick={onBookClick}
-            className="text-[14px] md:text-[15px] font-sans tracking-[-0.01em] text-ink/80 hover:text-ink transition-colors"
-          >
-            {copy.topbar.bookCta}
-            <span className="ml-1.5">→</span>
-          </a>
+          <nav className="flex items-center gap-6 md:gap-8">
+            <a
+              href="#pricing"
+              onClick={scrollTo("#pricing")}
+              className="text-[13px] md:text-[14px] font-sans tracking-[-0.005em] text-ink/70 hover:text-ink transition-colors"
+            >
+              {copy.topbar.pricing}
+            </a>
+            <a
+              href="#live-cta"
+              onClick={scrollTo("#live-cta")}
+              className="group inline-flex items-center gap-1.5 text-[13px] md:text-[14px] font-sans tracking-[-0.005em] text-ink hover:text-ink"
+            >
+              <span className="relative">
+                {copy.topbar.tryNow}
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 -bottom-0.5 h-px w-full bg-[var(--color-ember)]"
+                />
+              </span>
+              <span className="transition-transform duration-500 group-hover:translate-x-0.5">
+                →
+              </span>
+            </a>
+          </nav>
         </div>
       </div>
     </motion.header>

@@ -60,7 +60,7 @@
 - [ ] Pick which of the 3 pricing cards to keep, delete the other 2
   - Delete the data: `src/content/copy.ts` → `pricing.plans` array
   - The card component itself stays; just shrink the array
-- [ ] Push to fresh `tekmadev3` repo on GitHub
+- [x] Pushed to GitHub: https://github.com/Tekmadev/callline (main branch)
 - [ ] Connect repo to Vercel, deploy
 - [ ] (Optional) Replace SVG poster fallback (`src/components/three/PhonePoster.tsx`) with a real product screenshot
 - [ ] Submit sitemap to Google Search Console + Bing Webmaster Tools after deploy

@@ -9,7 +9,8 @@ export const copy = {
   },
 
   topbar: {
-    bookCta: "Book a demo",
+    pricing: "Pricing",
+    tryNow: "Try now",
   },
 
   hero: {
