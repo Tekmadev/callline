@@ -316,33 +316,43 @@ function CalendarScreen() {
         initial={{ scale: 0.94, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.7, ease: EASE_CINEMA }}
-        className="rounded-[20px] bg-white text-ink p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+        className="rounded-[18px] bg-white text-ink p-4 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
       >
-        <div className="flex items-start justify-between">
-          <div>
-            <div className="font-display italic text-[26px] leading-tight tracking-[-0.02em]">
-              {data.name}
-            </div>
-            <div className="text-ink/65 text-[12px] mt-0.5">{data.job}</div>
-          </div>
-          <span className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-ember)] font-mono">
-            {data.status}
-          </span>
+        {/* Status badge sits on top — never collides with the name */}
+        <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] text-[var(--color-ember)] font-mono">
+          <span className="inline-block w-1 h-1 rounded-full bg-[var(--color-ember)]" />
+          {data.status}
         </div>
 
-        <div className="mt-5 pt-4 border-t border-ink/10 flex items-center justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/55">
-            When
-          </span>
-          <span className="text-[14px] tracking-[-0.01em]">{data.when}</span>
+        <div
+          className="mt-2 font-display italic leading-[1.05] tracking-[-0.02em] truncate"
+          style={{ fontSize: 22 }}
+          title={data.name}
+        >
+          {data.name}
         </div>
-        <div className="mt-2 flex items-center justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/55">
-            SMS sent
-          </span>
-          <span className="text-[14px] tracking-[-0.01em] text-ink/80">
-            ✓ Confirmation to Sarah
-          </span>
+        <div className="text-ink/65 text-[11px] mt-0.5 truncate">
+          {data.job}
+        </div>
+
+        {/* Stacked label / value rows so values never get squeezed */}
+        <div className="mt-4 pt-3 border-t border-ink/10 space-y-2.5">
+          <div>
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink/45">
+              When
+            </div>
+            <div className="text-[13px] tracking-[-0.01em] mt-0.5">
+              {data.when}
+            </div>
+          </div>
+          <div>
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink/45">
+              SMS sent
+            </div>
+            <div className="text-[13px] tracking-[-0.01em] mt-0.5 text-ink/80">
+              ✓ Confirmation to Sarah
+            </div>
+          </div>
         </div>
       </motion.div>
 
@@ -350,7 +360,7 @@ function CalendarScreen() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6, ease: EASE_CINEMA }}
-        className="mt-4 text-white/55 text-[11px] font-mono"
+        className="mt-4 text-white/55 text-[10px] font-mono"
       >
         Total time on call: 47 seconds.
       </motion.div>
@@ -369,7 +379,7 @@ function StackScreen() {
         <span>Today’s bookings</span>
         <span className="text-[var(--color-ember)]">3 new</span>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         {data.items.map((item, i) => (
           <motion.div
             key={i}
@@ -380,18 +390,18 @@ function StackScreen() {
               duration: 0.55,
               ease: EASE_CINEMA,
             }}
-            className="rounded-[14px] bg-white/[0.06] border border-white/10 p-4"
+            className="rounded-[12px] bg-white/[0.06] border border-white/10 p-3"
           >
-            <div className="flex items-start justify-between">
-              <div>
-                <div className="text-white text-[14px] tracking-[-0.01em] leading-tight">
+            <div className="flex items-start gap-2">
+              <div className="min-w-0 flex-1">
+                <div className="text-white text-[13px] tracking-[-0.01em] leading-tight truncate">
                   {item.name}
                 </div>
-                <div className="text-white/55 text-[11px] mt-0.5">
+                <div className="text-white/55 text-[10px] mt-0.5 truncate">
                   {item.job}
                 </div>
               </div>
-              <div className="text-white/70 text-[11px] font-mono">
+              <div className="shrink-0 text-white/70 text-[10px] font-mono whitespace-nowrap pt-0.5">
                 {item.when}
               </div>
             </div>
