@@ -1,5 +1,6 @@
 import { TopBar } from "@/components/layout/TopBar";
 import { Hero } from "@/components/hero/Hero";
+import { MobileBridge } from "@/components/cta/MobileBridge";
 import { WowSection } from "@/components/wow/WowSection";
 import { NumbersSection } from "@/components/numbers/NumbersSection";
 import { HowItWorks } from "@/components/how-it-works/HowItWorks";
@@ -17,6 +18,7 @@ export default function Home() {
       <main className="relative">
         <TopBar />
         <Hero />
+        <MobileBridge />
         <WowSection />
         <NumbersSection />
         <HowItWorks />
