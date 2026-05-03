@@ -61,7 +61,8 @@
   - Delete the data: `src/content/copy.ts` → `pricing.plans` array
   - The card component itself stays; just shrink the array
 - [x] Pushed to GitHub: https://github.com/Tekmadev/callline (main branch)
-- [ ] Connect repo to Vercel, deploy
+- [x] Deployed to Vercel: https://callline-two.vercel.app
+  - Homepage, OG image, llms.txt, robots.txt, sitemap.xml all 200 OK in production
 - [ ] (Optional) Replace SVG poster fallback (`src/components/three/PhonePoster.tsx`) with a real product screenshot
 - [ ] Submit sitemap to Google Search Console + Bing Webmaster Tools after deploy
 - [ ] Create `hello@callline.ai` mailbox so the footer email link works
