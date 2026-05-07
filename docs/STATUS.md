@@ -56,7 +56,7 @@
 
 - [ ] Buy domain `callline.ai` (or `.com` / `.co`)
 - [ ] Connect domain in Vercel
-- [ ] Replace `CAL_BOOKING_URL` in `src/lib/constants.ts` with your real Cal.com link
+- [x] Replaced `CAL_BOOKING_URL` with real Cal.com link (https://cal.com/callline/startbooking)
 - [ ] Pick which of the 3 pricing cards to keep, delete the other 2
   - Delete the data: `src/content/copy.ts` → `pricing.plans` array
   - The card component itself stays; just shrink the array
